@@ -1,3 +1,15 @@
+const addTaskInLocalstorage = (taskValue) => {
+  let tasks = JSON.parse(localStorage.getItem('tasks'));
+
+  if (tasks) {
+    tasks.push(taskValue);
+  } else {
+    tasks = [taskValue];
+  }
+
+  localStorage.setItem('tasks', JSON.stringify(tasks));
+};
+
 const removeTask = (event) => {
   const taskListContainer = document.getElementById('taskListContainer');
   taskListContainer.removeChild(event.target.parentNode);
@@ -35,6 +47,7 @@ const addTask = () => {
     const taskListContainer = document.getElementById('taskListContainer');
     const taskListElement = createTaskListElement(taskInput.value);
     taskListContainer.appendChild(taskListElement);
+    addTaskInLocalstorage(taskInput.value);
     taskInput.value = '';
   }
 };
