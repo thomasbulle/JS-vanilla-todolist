@@ -28,6 +28,14 @@ const removeTask = (event, index) => {
   taskListContainer.removeChild(event.target.parentNode);
 };
 
+const completeTask = (event) => {
+  if (event.target.parentNode.classList.contains('completed')) {
+    event.target.parentNode.classList.remove('completed');
+  } else {
+    event.target.parentNode.classList.add('completed');
+  }
+};
+
 const createTaskListElement = (value, index) => {
   const taskListElement = document.createElement('li');
   taskListElement.classList.add('task-element');
@@ -41,6 +49,7 @@ const createTaskListElement = (value, index) => {
   completeBtnElement.classList.add('btn', 'complete-task-btn');
   completeBtnElement.title = 'Terminer la tâche';
   completeBtnElement.innerHTML = '<i class="fa-solid fa-check"></i>';
+  completeBtnElement.addEventListener('click', completeTask);
   taskListElement.appendChild(completeBtnElement);
 
   const removeBtnElement = document.createElement('button');
