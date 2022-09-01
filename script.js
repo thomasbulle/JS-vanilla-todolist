@@ -68,6 +68,17 @@ const addTask = () => {
 const init = () => {
   const addTaskBtn = document.getElementById('addTaskBtn');
   addTaskBtn.addEventListener('click', addTask);
+
+  const tasks = JSON.parse(localStorage.getItem('tasks'));
+  
+  if (tasks && tasks.length) {
+    const taskListContainer = document.getElementById('taskListContainer');
+
+    tasks.forEach((task, index) => {
+      const taskListElement = createTaskListElement(task, index);
+      taskListContainer.appendChild(taskListElement);
+    });
+  }
 };
 
 window.onload = init;
