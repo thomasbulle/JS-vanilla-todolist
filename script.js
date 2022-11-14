@@ -89,9 +89,48 @@ const addTask = () => {
   }
 };
 
+const filterTasks = (event) => {
+  const tasks = document.getElementsByClassName('task-element');
+
+  switch(event.target.value) {
+    case 'all': {
+      Array.from(tasks).forEach(task => {
+        task.style.display = 'flex';
+      });
+      break;
+    }
+    case 'todo': {
+      Array.from(tasks).forEach(task => {
+        if (task.classList.contains('completed')) {
+          task.style.display = 'none';
+        } else {
+          task.style.display = 'flex';
+        }
+      });
+      break;
+    }
+    case 'completed': {
+      Array.from(tasks).forEach(task => {
+        if (task.classList.contains('completed')) {
+          task.style.display = 'flex';
+        } else {
+          task.style.display = 'none';
+        }
+      });
+      break;
+    }
+    default: {
+      break;
+    }
+  }
+};
+
 const init = () => {
   const addTaskBtn = document.getElementById('addTaskBtn');
   addTaskBtn.addEventListener('click', addTask);
+
+  const filterSelect = document.getElementById('filterSelect');
+  filterSelect.addEventListener('change', filterTasks);
 
   const tasks = JSON.parse(localStorage.getItem('tasks'));
   
